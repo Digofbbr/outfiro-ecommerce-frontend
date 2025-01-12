@@ -28,7 +28,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchProductData()
-  }, [product])
+  }, [productId, products])
 
   if(!product){
     return <div>...Loading</div>
@@ -36,9 +36,9 @@ const Product = () => {
 
   return (
     <div className=''>
-      <div className='max-padd-container mt-3'>
+      <div className='max-padd-container'>
         {/* product data */}
-        <div className='flex gap-12 flex-col xl:flex-row bg-white pb-16 rounded-2xl '>
+        <div className='flex gap-12 flex-col xl:flex-row bg-primary p-3 mb-6 rounded-2xl '>
           {/* product image */}
           <div className='flex flex-1 gap-x-2 xl:flex-1'>
             <div className='flexCenter flex-col gap-[7px] flex-wrap'>
@@ -65,9 +65,9 @@ const Product = () => {
                 </div>
                 <span className='medium-14'>(122)</span>
               </div>
-            </div>/
+            </div>
             <h4 className='h4 my-2'>{currency}{product.price}.00</h4>
-            <p className='max-w-96'>{product.description}</p>
+            <p className='max-w-[555px]'>{product.description}</p>
             <div className='flex flex-col gap-4 my-4 mb-5'>
               <div className='flex gap-2'>
                 {[...product.sizes].sort((a,b) => {
@@ -79,7 +79,7 @@ const Product = () => {
               </div>
             </div>
             <div className='flex items-center gap-x-4 '>
-              <button className='btn-secondary !rounded-lg w-1/2 flexCenter gap-x-2 capitalize'>Add to Cart <TbShoppingBagPlus /></button>
+              <button className='btn-secondary !rounded-lg sm:w-1/2 flexCenter gap-x-2 capitalize'>Add to Cart <TbShoppingBagPlus /></button>
               <button className='btn-light !rounded-lg !py-3.5'><FaHeart /></button>
             </div>
             <div className='flex items-center gap-x-2 mt-3'>
@@ -87,7 +87,7 @@ const Product = () => {
               <span className='medium-14'>Free delivery on orders over 500$</span>
             </div>
             <hr className='my-3 w-2/3'/>
-            <div className='mt-2 flex flex-col gap-1 text-gray-30 text-xs'>
+            <div className='mt-2 flex flex-col gap-1 text-gray-30 text-sm'>
               <div>Authenticy You Can Trust</div>
               <div>Enjoy Cash on Delivery for Your Convenience</div>
               <div>Easy Returns and Exchanges Within 7 Days</div>
@@ -96,7 +96,7 @@ const Product = () => {
         </div>
         <ProductDescription />
         <ProductFeatures />
-        <RelatedProducts />
+        <RelatedProducts category={product.category} subCategory={product.subCategory}/>
       </div>
       <Footer />
     </div>
