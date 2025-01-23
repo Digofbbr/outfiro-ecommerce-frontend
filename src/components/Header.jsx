@@ -9,12 +9,15 @@ import { ShopContext } from '../context/ShopContext'
 
 const Header = () => {
 
-    const {token} = useContext(ShopContext)
+    const {token, cartItems, getCartCount, navigate} = useContext(ShopContext)
     const [menuOpened, setMenuOpened] = useState(false)
 
 
     const toggleMenu = () => {
         setMenuOpened((prev) => !prev)
+    }
+
+    const logout = () => {
     }
 
   return (
@@ -33,18 +36,26 @@ const Header = () => {
             <div className='flex-1 flex items-center justify-end gap-x-2 xs:gap-x-8'>
                 <FaBarsStaggered onClick={toggleMenu}  className='xl:hidden cursor-pointer text-xl'/>
                 <FaSearch className='text-lg cursor-pointer'/>
-                <Link to={''} className='flex relative'>
+                <Link to={'/cart'} className='flex relative'>
                     <TbBasket className='text-[27px]'/> 
-                    <span className='bg-secondary text-white text-[12px] font-semibold absolute left-1.5 -top-3.5 flexCenter h-4 w-4 rounded-full shadow-md'>0</span>
+                    <span className='bg-secondary text-white text-[12px] font-semibold absolute left-1.5 -top-3.5 flexCenter h-4 w-4 rounded-full shadow-md'>{getCartCount()}</span>
                 </Link>
                 <div className='group relative'>
                     <div className=''>
                         {token ? (
                             <div><TbUserCircle className='text-[29px] cursor-pointer'/></div>
                         ) : (
-                            <button className='btn-light flexCenter gap-x-2'>Login<RiUserLine className='text-xl'/></button>
+                            <button onClick={() => navigate('/login')} className='btn-light flexCenter gap-x-2'>Login<RiUserLine className='text-xl'/></button>
                         )}
 
+                    </div>
+                    <div>
+                        {token && (
+                            <ul className='bg-white p-2 ring-1 w-32 ring-slate-900/5 rounded absolute right-0 top-7 hidden group-hover:flex flex-col regular-14 shadow-md z-50'>
+                                <li className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer' onClick={() => navigate('/orders')}>Orders</li>
+                                <li className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer' onClick={() => navigate('/login')}>Logout</li>
+                            </ul>
+                        )}
                     </div>
                 </div>
             </div>

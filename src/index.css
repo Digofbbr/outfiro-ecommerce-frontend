@@ -85,6 +85,9 @@
 
   .btn-secondary {
     @apply medium-14 bg-secondary ring-1 ring-secondary text-white px-7 py-2.5 rounded-full;
+    &:disabled{
+      @apply bg-gray-500 ring-gray-400 cursor-not-allowed
+    }
   }
 
   .max-padd-container {
