@@ -7,6 +7,8 @@ import ProductDescription from '../components/ProductDescription'
 import ProductFeatures from '../components/ProductFeatures'
 import RelatedProducts from '../components/RelatedProducts'
 import Footer from '../components/Footer'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToFavorite, removeFromFavorite } from '../slice/FavoriteSlice'
 
 const Product = () => {
 
@@ -17,6 +19,8 @@ const Product = () => {
   const [image, setImage] = useState("")
   const [size, setSize] = useState("")
 
+  const dispatch = useDispatch()
+  const favorites  = useSelector((state) => state.favorite.favorites)
   
   const fetchProductData = async () => {
     const selectedProduct = products.find((item) => item._id === productId)
@@ -32,6 +36,14 @@ const Product = () => {
 
   if(!product){
     return <div>...Loading</div>
+  }
+
+  const handleAddFavorite = () => {
+    if(favorites.includes(productId)){
+      dispatch(removeFromFavorite(productId))
+    }else{
+      dispatch(addToFavorite(productId))
+    }
   }
 
   return (
@@ -80,7 +92,7 @@ const Product = () => {
             </div>
             <div className='flex items-center gap-x-4 '>
               <button onClick={() => addToCart(product._id, size)} className='btn-secondary !rounded-lg sm:w-1/2 flexCenter gap-x-2 capitalize'>Add to Cart <TbShoppingBagPlus /></button>
-              <button className='btn-light !rounded-lg !py-3.5'><FaHeart /></button>
+              <button className={`btn-light !rounded-lg !py-3.5 `} onClick={() => handleAddFavorite()}><FaHeart className={`${favorites.includes(productId) ? 'text-red-600' : ''}`}/></button>
             </div>
             <div className='flex items-center gap-x-2 mt-3'>
               <FaTruckFast className='text-lg' />

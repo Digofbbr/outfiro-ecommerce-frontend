@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import PlaceOrder from "./pages/PlaceOrder"
 import Login from "./pages/Login"
 import Orders from "./pages/Orders"
+import Favorites from "./pages/Favorites"
 
  
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/login" element={<Login />}/>
         <Route path="/place-order" element={<PlaceOrder />}/>
         <Route path="/orders" element={<Orders />}/>
+        <Route path="/favorites" element={<Favorites />}/>
       </Routes>
     </main>
   )

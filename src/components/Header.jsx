@@ -53,6 +53,7 @@ const Header = () => {
                         {token && (
                             <ul className='bg-white p-2 ring-1 w-32 ring-slate-900/5 rounded absolute right-0 top-7 hidden group-hover:flex flex-col regular-14 shadow-md z-50'>
                                 <li className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer' onClick={() => navigate('/orders')}>Orders</li>
+                                <li className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer' onClick={() => navigate('/favorites')}>Favorites</li>
                                 <li className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer' onClick={() => navigate('/login')}>Logout</li>
                             </ul>
                         )}

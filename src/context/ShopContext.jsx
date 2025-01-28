@@ -38,6 +38,8 @@ const ShopContextProvider = (props) => {
             cartData[itemId][size] = 1
         }
 
+        toast("Added to cart!")
+
         setCartItems(cartData)
     }
 
